@@ -1,0 +1,9 @@
+#include <stdio.h>
+int main() {
+ char str[] = "Hello world";
+ for (int i = 0; str[i] != '\0'; i++) {
+ str[i] = str[i] ^ 0;
+ }
+ printf("Result a[er XOR with 0: %s\n", str);
+ return 0;
+}
