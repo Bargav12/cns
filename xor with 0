@@ -7,3 +7,15 @@ int main() {
  printf("Result a[er XOR with 0: %s\n", str);
  return 0;
 }
+
+
+def main():
+    str_val = "Hello world"
+    result = ""
+    
+    # Loop through each character and perform XOR operation
+    for char in str_val:
+        result += chr(ord(char) ^ 0)  # XOR with 0 doesn't change the character
+    
+    print(f"Result after XOR with 0: {result}")
+main()
