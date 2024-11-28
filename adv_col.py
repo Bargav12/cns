@@ -1,3 +1,44 @@
+def advanced_columnar_transposition(message, key):
+    message = message.replace(" ", "").upper()
+    key = key.upper()
+    
+    num_columns = len(key)
+    num_rows = (len(message) + num_columns - 1) // num_columns  # Equivalent to ceil(len(message) / num_columns)
+    
+    # Create a grid and fill it with the message, padding with 'X' if necessary
+    grid = [['X' for _ in range(num_columns)] for _ in range(num_rows)]
+    index = 0
+    for r in range(num_rows):
+        for c in range(num_columns):
+            if index < len(message):
+                grid[r][c] = message[index]
+                index += 1
+    
+    # Get column order based on sorted key
+    col_order = sorted(range(num_columns), key=lambda i: key[i])
+    
+    # Read columns in sorted order
+    cipher_text = ''.join(''.join(grid[r][c] for r in range(num_rows)) for c in col_order)
+    
+    return cipher_text
+    
+# Driver Code
+if __name__ == "__main__":
+    message = input("Enter the message: ")
+    key = input("Enter the key: ")
+    
+    cipher_text = advanced_columnar_transposition(message, key)
+    print("Advanced Columnar Transposition Cipher Text:", cipher_text)
+
+
+
+
+
+
+
+
+
+
 # Function to encrypt plaintext using advanced columnar transposition cipher
 def advanced_columnar_transposition_encrypt(plaintext, key):
     n = len(key)  # Number of columns based on the length of the key
