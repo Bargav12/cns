@@ -20,3 +20,29 @@ int main() {
  printf("\n");
  return 0;
 }
+
+
+def main():
+    str_val = "Hello world"
+    print(f"Original string: {str_val}")
+    
+    # AND with 127
+    print("AND with 127: ", end="")
+    for char in str_val:
+        print(chr(ord(char) & 127), end="")
+    print()
+    
+    # OR with 127
+    print("OR with 127: ", end="")
+    for char in str_val:
+        print(chr(ord(char) | 127), end="")
+    print()
+    
+    # XOR with 127
+    print("XOR with 127: ", end="")
+    for char in str_val:
+        print(chr(ord(char) ^ 127), end="")
+    print()
+
+if __name__ == "__main__":
+    main()
