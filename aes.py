@@ -1,23 +1,26 @@
 from Crypto.Cipher import AES
 from Crypto.Random import get_random_bytes
 import base64
-from Crypto.Util.Padding import pad, unpad
 
 def main():
     message = "This is a confidential message"
-    secret_key = get_random_bytes(16)
+    secret_key = get_random_bytes(16)  # AES key size of 128 bits (16 bytes)
     cipher = AES.new(secret_key, AES.MODE_ECB)
-    padded_message = pad(message.encode('utf-8'), AES.block_size)
-    encrypted_message = cipher.encrypt(padded_message)
+
+    while len(message) % 16 != 0:
+        message += ' '  # Padding with spaces to make the message length a multiple of 16
+
+    encrypted_message = cipher.encrypt(message.encode('utf-8'))
     encrypted_base64 = base64.b64encode(encrypted_message).decode('utf-8')
     print("Encrypted Message (Base64):", encrypted_base64)
+
     cipher = AES.new(secret_key, AES.MODE_ECB)
-    decrypted_message = cipher.decrypt(base64.b64decode(encrypted_base64))
-    decrypted_message = unpad(decrypted_message, AES.block_size).decode('utf-8')
+    decrypted_message = cipher.decrypt(base64.b64decode(encrypted_base64)).decode('utf-8').strip()
     print("Decrypted Message:", decrypted_message)
 
 if __name__ == "__main__":
     main()
+
 
 
 
